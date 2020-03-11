@@ -38,6 +38,7 @@ function menuComponent(array){
   // create elements
   const menu = document.createElement('div');
   const list = document.createElement('ul');
+  //grab button
   const button = document.querySelector('.menu-button');
 
   // give elements classes
@@ -72,3 +73,5 @@ const menu = menuComponent(menuItems);
 
 // attach menu to parent
 papa.append(menu);
+
+gsap.from('.menu', {duration: 1.5, x:-300});
