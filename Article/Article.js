@@ -112,3 +112,63 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+function articleCreator(title, date, firstParagraph, secondParagraph, thirdParagraph){
+
+  // create all elements for the component 
+  const article = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const articleDate = document.createElement('p');
+  const articleP1 = document.createElement('p');
+  const articleP2 = document.createElement('p');
+  const articleP3 = document.createElement('p');
+  const expandButton = document.createElement('span');
+
+  // give elements classes
+  article.classList.add('article');
+  articleDate.classList.add('date');
+  expandButton.classList.add('close');
+
+  // give elements contents from params
+  articleTitle.textContent = title;
+  articleDate.textContent = date;
+  articleP1.textContent = firstParagraph;
+  articleP2.textContent = secondParagraph;
+  articleP3.textContent = thirdParagraph;
+  expandButton.textContent = 'Show';
+
+  // put all component pieces together
+  article.append(articleTitle, articleDate, articleP1, articleP2, articleP3, expandButton);
+
+  // add toggle event listener
+  expandButton.addEventListener('click', () => {
+    // add toggling class to container
+    article.classList.toggle('article-open');
+
+    // change location of toggling button
+    expandButton.classList.toggle('expandButton');
+    expandButton.classList.toggle('close');
+
+    // Change text content of button
+    if(expandButton.textContent === 'Hide'){
+      expandButton.textContent = 'Show';
+    } else {
+      expandButton.textContent = 'Hide'
+    };
+
+  });
+
+  // return the container w/ components attached
+  return article
+}
+
+// grab the parent element for the articles to be attached to
+const articleContainer = document.querySelector('.articles');
+
+// loop through data array
+data.forEach(item => {
+
+  // append the article to the document
+  articleContainer.append(articleCreator(item.title, item.date, item.firstParagraph, item.secondParagraph, item.thirdParagraph))
+
+});
